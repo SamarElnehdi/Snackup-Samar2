@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SnakUp Content — Agence de Production Digitale</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300;1,9..144,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --o: #F97316; --od: #C2410C; --ol: #FED7AA; --op: #FFF7ED;
+  --dark: #0A0B0D; --dark2: #111318; --dark3: #1A1D27;
+  --white: #FFFFFF; --off: #F8F7F4; --gray: #E8E6E0;
+  --text: #1A1A1A; --text2: #5A5A5A; --text3: #9A9A9A;
+  --font-display: 'Syne', sans-serif;
+  --font-serif: 'Fraunces', serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--white);color:var(--text);overflow-x:hidden}
+
+/* ── GRAIN overlay ── */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.4}
+
+/* ── HEADER ── */
+header{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5vw;height:68px;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+header.scrolled{background:rgba(10,11,13,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{width:34px;height:34px;background:var(--o);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;color:white;font-size:15px}
+.logo-wordmark{font-family:var(--font-display);font-weight:700;color:white;font-size:16px;letter-spacing:-.02em}
+.logo-wordmark span{color:var(--o)}
+nav{display:flex;align-items:center;gap:2px}
+nav a{color:rgba(255,255,255,.55);font-size:13px;font-weight:400;text-decoration:none;padding:7px 14px;border-radius:6px;transition:all .2s;font-family:var(--font-body)}
+nav a:hover{color:white;background:rgba(255,255,255,.07)}
+.nav-cta{background:var(--o)!important;color:white!important;font-weight:500!important;padding:7px 18px!important}
+.nav-cta:hover{background:var(--od)!important}
+
+/* ── HERO ── */
+#hero{min-height:100vh;background:var(--dark);display:flex;flex-direction:column;justify-content:flex-end;padding:0 5vw 80px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(249,115,22,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(249,115,22,.05) 1px,transparent 1px);background-size:60px 60px;opacity:.5}
+.hero-glow{position:absolute;top:-20%;left:-10%;width:60%;height:80%;background:radial-gradient(ellipse,rgba(249,115,22,.12) 0%,transparent 65%);pointer-events:none}
+.hero-glow2{position:absolute;bottom:-10%;right:-5%;width:40%;height:50%;background:radial-gradient(ellipse,rgba(249,115,22,.08) 0%,transparent 65%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(249,115,22,.3);border-radius:20px;padding:5px 14px 5px 6px;margin-bottom:32px;animation:fadeUp .8s ease both}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--o);animation:pulse 2s infinite}
+.hero-badge-text{font-size:12px;color:rgba(255,255,255,.6);font-weight:400;letter-spacing:.04em}
+.hero-eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:var(--o);font-weight:600;margin-bottom:16px;animation:fadeUp .8s .1s ease both;opacity:0}
+h1{font-family:var(--font-display);font-size:clamp(48px,7vw,96px);font-weight:800;color:white;line-height:.95;letter-spacing:-.04em;margin-bottom:32px;animation:fadeUp .8s .2s ease both;opacity:0}
+h1 em{font-style:italic;font-family:var(--font-serif);font-weight:300;color:var(--o)}
+.hero-sub{font-size:clamp(15px,1.4vw,18px);color:rgba(255,255,255,.45);max-width:520px;line-height:1.65;margin-bottom:44px;font-weight:300;animation:fadeUp .8s .3s ease both;opacity:0}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp .8s .4s ease both;opacity:0}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:all .2s;font-family:var(--font-body);border:none}
+.btn-orange{background:var(--o);color:white}
+.btn-orange:hover{background:var(--od);transform:translateY(-1px);box-shadow:0 8px 24px rgba(249,115,22,.35)}
+.btn-ghost{background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.12)}
+.btn-ghost:hover{background:rgba(255,255,255,.12);color:white}
+.hero-clients{position:absolute;bottom:28px;right:5vw;display:flex;align-items:center;gap:12px;animation:fadeUp .8s .6s ease both;opacity:0}
+.hero-client-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.3)}
+.hero-client-logos{display:flex;gap:8px}
+.client-chip{padding:4px 10px;border:1px solid rgba(255,255,255,.1);border-radius:4px;font-size:10px;color:rgba(255,255,255,.35);font-weight:500;letter-spacing:.04em}
+.hero-scroll{position:absolute;bottom:32px;left:5vw;display:flex;flex-direction:column;align-items:flex-start;gap:6px;animation:fadeUp .8s .7s ease both;opacity:0}
+.scroll-line{width:1px;height:40px;background:linear-gradient(var(--o),transparent)}
+.scroll-text{font-size:10px;letter-spacing:.14em;color:rgba(255,255,255,.25);text-transform:uppercase;writing-mode:horizontal-tb}
+
+/* ── SECTION BASE ── */
+section{padding:100px 5vw}
+.section-label{display:inline-block;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--o);font-weight:600;margin-bottom:14px}
+h2{font-family:var(--font-display);font-size:clamp(36px,5vw,64px);font-weight:800;line-height:1;letter-spacing:-.03em;margin-bottom:20px}
+h2 em{font-style:italic;font-family:var(--font-serif);font-weight:300;color:var(--o)}
+.section-intro{font-size:16px;color:var(--text2);max-width:560px;line-height:1.7;font-weight:300}
+
+/* ── PROMESSE ── */
+#promesse{background:var(--off);padding:80px 5vw}
+.promesse-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:60px}
+.promesse-card{background:white;padding:40px;position:relative;overflow:hidden;transition:all .3s}
+.promesse-card::before{content:'';position:absolute;left:0;top:0;width:3px;height:0;background:var(--o);transition:height .4s}
+.promesse-card:hover::before{height:100%}
+.promesse-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.08)}
+.pc-num{font-family:var(--font-display);font-size:48px;font-weight:800;color:var(--ol);line-height:1;margin-bottom:16px}
+.pc-title{font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:10px;color:var(--text)}
+.pc-text{font-size:14px;color:var(--text2);line-height:1.7;font-weight:300}
+
+/* ── REEL ── */
+#reel{background:var(--dark);padding:80px 5vw;text-align:center}
+#reel h2{color:white}
+.reel-wrap{margin-top:48px;position:relative;border-radius:16px;overflow:hidden;background:var(--dark3);aspect-ratio:16/9;max-height:540px;cursor:pointer}
+.reel-bg{position:absolute;inset:0;background:linear-gradient(135deg,rgba(249,115,22,.1) 0%,transparent 50%,rgba(249,115,22,.05) 100%)}
+.reel-play{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+.play-btn{width:72px;height:72px;border-radius:50%;background:var(--o);display:flex;align-items:center;justify-content:center;font-size:24px;transition:all .3s;box-shadow:0 0 0 0 rgba(249,115,22,.4)}
+.play-btn:hover{transform:scale(1.1);box-shadow:0 0 0 16px rgba(249,115,22,.15)}
+.reel-label{color:rgba(255,255,255,.4);font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.reel-tags{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.reel-tag{padding:4px 12px;border:1px solid rgba(249,115,22,.2);border-radius:20px;font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.04em}
+
+/* ── CTA DIAGNOSTIC ── */
+#cta-diag{background:linear-gradient(135deg,var(--o) 0%,var(--od) 100%);padding:80px 5vw;text-align:center;position:relative;overflow:hidden}
+#cta-diag::before{content:'DIAGNOSTIC';position:absolute;font-family:var(--font-display);font-weight:800;font-size:180px;color:rgba(255,255,255,.05);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;letter-spacing:-.05em;pointer-events:none}
+#cta-diag h2{color:white;margin-bottom:14px}
+#cta-diag p{color:rgba(255,255,255,.7);font-size:17px;max-width:500px;margin:0 auto 36px;line-height:1.6;font-weight:300}
+.btn-white{background:white;color:var(--od);font-weight:600}
+.btn-white:hover{background:var(--off);transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.15)}
+
+/* ── PREUVES : CLIENTS ── */
+#preuves{background:white;padding:80px 5vw}
+.clients-ticker{margin:48px -5vw 0;overflow:hidden;padding:20px 0;border-top:1px solid var(--gray);border-bottom:1px solid var(--gray);background:var(--off)}
+.ticker-track{display:flex;gap:0;animation:ticker 20s linear infinite}
+.ticker-item{display:flex;align-items:center;gap:48px;padding:0 48px;white-space:nowrap;flex-shrink:0}
+.ticker-client{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--text3);letter-spacing:-.02em;transition:color .2s}
+.ticker-client:hover{color:var(--o)}
+.ticker-dot{width:5px;height:5px;border-radius:50%;background:var(--ol)}
+
+/* ── CHIFFRES ── */
+#chiffres{background:var(--dark);padding:80px 5vw}
+.chiffres-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:60px;background:rgba(255,255,255,.06)}
+.chiffre-card{background:var(--dark);padding:48px 32px;text-align:center}
+.chiffre-num{font-family:var(--font-display);font-size:clamp(48px,6vw,72px);font-weight:800;color:var(--o);line-height:1;margin-bottom:8px;letter-spacing:-.04em}
+.chiffre-unit{font-size:20px;color:var(--ol)}
+.chiffre-label{font-size:14px;color:rgba(255,255,255,.4);font-weight:300;letter-spacing:.02em}
+.chiffre-sub{font-size:11px;color:rgba(249,115,22,.5);margin-top:6px;font-style:italic}
+
+/* ── TEMOIGNAGES ── */
+#temoignages{background:var(--off);padding:80px 5vw}
+.testi-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:48px}
+.testi-card{background:white;border-radius:12px;padding:32px;border:1px solid var(--gray);transition:all .3s;position:relative}
+.testi-card::before{content:'\201C';position:absolute;top:20px;right:24px;font-size:80px;font-family:var(--font-serif);color:var(--ol);line-height:1}
+.testi-card:hover{border-color:var(--ol);box-shadow:0 12px 32px rgba(249,115,22,.1);transform:translateY(-4px)}
+.testi-text{font-size:14px;line-height:1.75;color:var(--text2);font-weight:300;font-style:italic;margin-bottom:20px;font-family:var(--font-serif)}
+.testi-author{display:flex;align-items:center;gap:10px}
+.testi-av{width:36px;height:36px;border-radius:50%;background:var(--o);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0}
+.testi-name{font-size:13px;font-weight:600;color:var(--text)}
+.testi-role{font-size:11px;color:var(--text3)}
+
+/* ── SERVICES ── */
+#services{background:white;padding:80px 5vw}
+.services-intro{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:60px}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.service-card{border-radius:12px;padding:36px;border:1.5px solid var(--gray);transition:all .3s;position:relative;overflow:hidden;cursor:pointer}
+.service-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(249,115,22,.04),transparent);opacity:0;transition:opacity .3s}
+.service-card:hover{border-color:var(--o);transform:translateY(-6px);box-shadow:0 20px 48px rgba(249,115,22,.12)}
+.service-card:hover::after{opacity:1}
+.service-card.featured{background:var(--dark);border-color:var(--dark)}
+.sc-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:24px}
+.sc-tag{display:inline-block;font-size:10px;text-transform:uppercase;letter-spacing:.1em;font-weight:600;color:var(--o);margin-bottom:8px}
+.sc-title{font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:10px;color:var(--text);line-height:1.1}
+.service-card.featured .sc-title{color:white}
+.service-card.featured .sc-tag{color:var(--ol)}
+.sc-text{font-size:13px;color:var(--text2);line-height:1.65;font-weight:300;margin-bottom:20px}
+.service-card.featured .sc-text{color:rgba(255,255,255,.5)}
+.sc-items{display:flex;flex-direction:column;gap:6px}
+.sc-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text3)}
+.sc-item::before{content:'▸';color:var(--o);font-size:10px;flex-shrink:0}
+.service-card.featured .sc-item{color:rgba(255,255,255,.35)}
+
+/* ── CONTACT ── */
+#contact{background:var(--off);padding:80px 5vw}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:60px}
+.contact-left{display:flex;flex-direction:column;gap:20px}
+.checklist{display:flex;flex-direction:column;gap:12px;margin-bottom:8px}
+.check-item{display:flex;align-items:flex-start;gap:12px;padding:14px;background:white;border-radius:8px;border:1px solid var(--gray)}
+.check-icon{width:22px;height:22px;border-radius:50%;background:var(--op);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:1px}
+.check-text{font-size:13px;color:var(--text2);line-height:1.5}
+.mini-audit{background:var(--dark);border-radius:12px;padding:28px;margin-top:4px}
+.ma-title{font-family:var(--font-display);font-weight:700;font-size:18px;color:white;margin-bottom:6px}
+.ma-sub{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:20px;line-height:1.5}
+.ma-pills{display:flex;flex-wrap:wrap;gap:6px}
+.ma-pill{padding:5px 12px;border:1px solid rgba(249,115,22,.2);border-radius:20px;font-size:11px;color:rgba(255,255,255,.5);cursor:pointer;transition:all .2s}
+.ma-pill:hover{background:rgba(249,115,22,.15);border-color:var(--o);color:var(--o)}
+.form-card{background:white;border-radius:12px;padding:40px;border:1px solid var(--gray)}
+.form-title{font-family:var(--font-display);font-size:24px;font-weight:700;margin-bottom:6px}
+.form-sub{font-size:13px;color:var(--text3);margin-bottom:28px}
+.form-group{margin-bottom:16px}
+.form-label{display:block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:6px}
+.form-input{width:100%;border:1.5px solid var(--gray);border-radius:8px;padding:11px 14px;font-size:14px;font-family:var(--font-body);color:var(--text);background:var(--off);outline:none;transition:border .2s}
+.form-input:focus{border-color:var(--o);background:white}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%239A9A9A' d='M4 6l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:16px}
+textarea.form-input{resize:vertical;min-height:90px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.submit-btn{width:100%;padding:15px;background:var(--o);color:white;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:all .2s;margin-top:4px}
+.submit-btn:hover{background:var(--od);transform:translateY(-1px);box-shadow:0 8px 24px rgba(249,115,22,.3)}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);padding:60px 5vw 32px;border-top:1px solid rgba(255,255,255,.05)}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,.3);line-height:1.7;font-weight:300;margin-top:12px;max-width:280px}
+.footer-col-title{font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:600;color:rgba(255,255,255,.3);margin-bottom:16px}
+.footer-link{display:block;font-size:13px;color:rgba(255,255,255,.45);text-decoration:none;margin-bottom:8px;transition:color .2s}
+.footer-link:hover{color:var(--o)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:24px;display:flex;justify-content:space-between;align-items:center}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.2)}
+.footer-award{display:flex;align-items:center;gap:8px;background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.15);border-radius:6px;padding:6px 12px}
+.award-icon{font-size:14px}
+.award-text{font-size:11px;color:rgba(255,255,255,.5)}
+.award-text strong{color:var(--o)}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.reveal{opacity:0;transform:translateY(32px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* ── ECOSYSTEM BAND ── */
+#ecosystem{background:var(--dark2);padding:60px 5vw;overflow:hidden;position:relative}
+#ecosystem::before{content:'ECOSYSTEM';position:absolute;font-family:var(--font-display);font-weight:800;font-size:160px;color:rgba(255,255,255,.02);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;letter-spacing:-.05em}
+.eco-flow{display:flex;align-items:center;gap:0;overflow-x:auto;padding:20px 0;scrollbar-width:none}
+.eco-flow::-webkit-scrollbar{display:none}
+.eco-node{flex-shrink:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:12px 18px;text-align:center;min-width:120px}
+.eco-node.highlight{background:rgba(249,115,22,.1);border-color:rgba(249,115,22,.3)}
+.eco-node-title{font-size:11px;font-weight:600;color:rgba(255,255,255,.7);font-family:var(--font-display);white-space:nowrap}
+.eco-node.highlight .eco-node-title{color:var(--o)}
+.eco-node-sub{font-size:9px;color:rgba(255,255,255,.25);margin-top:2px;white-space:nowrap}
+.eco-arrow{flex-shrink:0;color:rgba(249,115,22,.35);font-size:16px;padding:0 6px}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header id="header">
+  <a href="#hero" class="logo">
+    <div class="logo-mark">S</div>
+    <div class="logo-wordmark">Snak<span>Up</span> Content</div>
+  </a>
+  <nav>
+    <a href="#preuves">Preuves</a>
+    <a href="#services">Services</a>
+    <a href="#ecosystem-sect">Écosystème</a>
+    <a href="#contact" class="nav-cta">Diagnostic Gratuit →</a>
+  </nav>
+</header>
+
+<!-- ══════════════════════════════════════ -->
+<!-- HERO                                  -->
+<!-- ══════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+  </div>
+
+  <div class="hero-badge">
+    <div class="hero-badge-dot"></div>
+    <span class="hero-badge-text">🏅 Best Automotive Campaign 2025 · GAC Motors</span>
+  </div>
+
+  <div class="hero-eyebrow">Agence de Production Digitale · Tunisie</div>
+
+  <h1>
+    Votre contenu,<br>
+    <em>amplifié</em> par<br>
+    l'intelligence.
+  </h1>
+
+  <p class="hero-sub">
+    SnakUp produit, orchestre et publie le contenu qui fait croître vos clients — de l'ATP Challenger à la grande entreprise internationale.
+  </p>
+
+  <div class="hero-ctas">
+    <a href="#contact" class="btn btn-orange">Obtenir mon diagnostic gratuit →</a>
+    <a href="#reel" class="btn btn-ghost">▶ Voir la réalisation</a>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Scroll</span>
+  </div>
+
+  <div class="hero-clients">
+    <span class="hero-client-label">Nos clients</span>
+    <div class="hero-client-logos">
+      <span class="client-chip">ATP Tennis</span>
+      <span class="client-chip">GAC Motors</span>
+      <span class="client-chip">Magic Hotels</span>
+      <span class="client-chip">ITF</span>
+      <span class="client-chip">UBCI</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- PROMESSE FORTE                        -->
+<!-- ══════════════════════════════════════ -->
+<section id="promesse">
+  <div style="max-width:640px">
+    <span class="section-label">Notre promesse</span>
+    <h2>Ce qui nous rend <em>différents</em></h2>
+    <p class="section-intro">Nous ne sommes pas qu'une agence de contenu. Nous sommes votre opérateur digital complet — de la stratégie au tournage, de la publication à l'analyse.</p>
+  </div>
+  <div class="promesse-grid">
+    <div class="promesse-card reveal">
+      <div class="pc-num">01</div>
+      <div class="pc-title">Production Bout-en-Bout</div>
+      <div class="pc-text">Brief, tournage, montage, post-production, publication — une seule équipe coordonnée de l'idée au live, sans friction ni perte de temps.</div>
+    </div>
+    <div class="promesse-card reveal reveal-delay-1">
+      <div class="pc-num">02</div>
+      <div class="pc-title">IA en Production Réelle</div>
+      <div class="pc-text">Notre Agent IA génère des contenus, détecte les tendances et valide les copies avant publication. L'humain créé, la machine amplifie.</div>
+    </div>
+    <div class="promesse-card reveal reveal-delay-2">
+      <div class="pc-num">03</div>
+      <div class="pc-title">Expertise Événementielle Prouvée</div>
+      <div class="pc-text">ATP Challenger, ITF Junior, CAF U14 — nous couvrons les grands événements sportifs avec une exécution live sans faille.</div>
+    </div>
+    <div class="promesse-card reveal reveal-delay-3">
+      <div class="pc-num">04</div>
+      <div class="pc-title">Résultats Mesurables</div>
+      <div class="pc-text">Chaque campagne est trackée dans notre dashboard Looker Studio. ROI, reach, engagement — vous voyez exactement ce que vous obtenez.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- REEL HERO                             -->
+<!-- ══════════════════════════════════════ -->
+<section id="reel">
+  <span class="section-label" style="color:var(--ol)">Notre travail</span>
+  <h2 style="color:white">Des <em>productions</em> qui parlent</h2>
+  <div class="reel-wrap reveal">
+    <div class="reel-bg"></div>
+    <!-- Simulated video frame with content cards -->
+    <div style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:2px;opacity:.15">
+      <div style="background:linear-gradient(135deg,#F97316,#C2410C)"></div>
+      <div style="background:linear-gradient(135deg,#1A1D27,#0A0B0D)"></div>
+      <div style="background:linear-gradient(135deg,#C2410C,#1A1D27)"></div>
+      <div style="background:linear-gradient(135deg,#0A0B0D,#F97316)"></div>
+      <div style="background:linear-gradient(135deg,#1A1D27,#C2410C)"></div>
+      <div style="background:linear-gradient(135deg,#F97316,#0A0B0D)"></div>
+    </div>
+    <div class="reel-play">
+      <div class="play-btn">▶</div>
+      <div class="reel-label">Showreel SnakUp Content 2025</div>
+      <div class="reel-tags">
+        <span class="reel-tag">ATP Challenger Monastir</span>
+        <span class="reel-tag">GAC Motors</span>
+        <span class="reel-tag">Magic Hotels</span>
+        <span class="reel-tag">ITF Junior</span>
+        <span class="reel-tag">CAF U14</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CTA DIAGNOSTIC                        -->
+<!-- ══════════════════════════════════════ -->
+<section id="cta-diag">
+  <span class="section-label" style="color:rgba(255,255,255,.6)">Gratuit · Sans engagement</span>
+  <h2 style="color:white;font-size:clamp(32px,4vw,54px)">Où en est votre<br>présence digitale ?</h2>
+  <p>En 15 minutes, nous analysons votre situation et vous donnons 3 actions concrètes pour doubler votre impact digital.</p>
+  <a href="#contact" class="btn btn-white">Réserver mon diagnostic →</a>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- PREUVES : CLIENTS                     -->
+<!-- ══════════════════════════════════════ -->
+<section id="preuves" style="padding-bottom:0">
+  <span class="section-label">Ils nous font confiance</span>
+  <h2>Clients & <em>Partenaires</em></h2>
+
+  <div class="clients-ticker">
+    <div class="ticker-track">
+      <!-- first set -->
+      <div class="ticker-item">
+        <span class="ticker-client">ATP CHALLENGER</span><span class="ticker-dot"></span>
+        <span class="ticker-client">GAC MOTORS</span><span class="ticker-dot"></span>
+        <span class="ticker-client">MAGIC HOTELS</span><span class="ticker-dot"></span>
+        <span class="ticker-client">ITF JUNIOR</span><span class="ticker-dot"></span>
+        <span class="ticker-client">5 STAR IMPORTS</span><span class="ticker-dot"></span>
+        <span class="ticker-client">OLVINO</span><span class="ticker-dot"></span>
+        <span class="ticker-client">UBCI</span><span class="ticker-dot"></span>
+        <span class="ticker-client">CAF U14</span><span class="ticker-dot"></span>
+        <span class="ticker-client">MIRANDA MOBILYA</span><span class="ticker-dot"></span>
+        <span class="ticker-client">SIYADAH</span><span class="ticker-dot"></span>
+      </div>
+      <!-- duplicate for seamless loop -->
+      <div class="ticker-item">
+        <span class="ticker-client">ATP CHALLENGER</span><span class="ticker-dot"></span>
+        <span class="ticker-client">GAC MOTORS</span><span class="ticker-dot"></span>
+        <span class="ticker-client">MAGIC HOTELS</span><span class="ticker-dot"></span>
+        <span class="ticker-client">ITF JUNIOR</span><span class="ticker-dot"></span>
+        <span class="ticker-client">5 STAR IMPORTS</span><span class="ticker-dot"></span>
+        <span class="ticker-client">OLVINO</span><span class="ticker-dot"></span>
+        <span class="ticker-client">UBCI</span><span class="ticker-dot"></span>
+        <span class="ticker-client">CAF U14</span><span class="ticker-dot"></span>
+        <span class="ticker-client">MIRANDA MOBILYA</span><span class="ticker-dot"></span>
+        <span class="ticker-client">SIYADAH</span><span class="ticker-dot"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CHIFFRES CLÉS                         -->
+<!-- ══════════════════════════════════════ -->
+<section id="chiffres" style="padding-top:0">
+  <div class="chiffres-grid">
+    <div class="chiffre-card reveal">
+      <div class="chiffre-num">48<span class="chiffre-unit">K</span></div>
+      <div class="chiffre-label">Vues · Aftermovie ATP</div>
+      <div class="chiffre-sub">+320% vs objectif</div>
+    </div>
+    <div class="chiffre-card reveal reveal-delay-1">
+      <div class="chiffre-num">7<span class="chiffre-unit">+</span></div>
+      <div class="chiffre-label">Clients actifs</div>
+      <div class="chiffre-sub">Local & international</div>
+    </div>
+    <div class="chiffre-card reveal reveal-delay-2">
+      <div class="chiffre-num">300<span class="chiffre-unit">%</span></div>
+      <div class="chiffre-label">ROI scénario ambitieux</div>
+      <div class="chiffre-sub">Modèle 12 mois</div>
+    </div>
+    <div class="chiffre-card reveal reveal-delay-3">
+      <div class="chiffre-num">1<span class="chiffre-unit">🏅</span></div>
+      <div class="chiffre-label">Prix Best Auto Campaign</div>
+      <div class="chiffre-sub">GAC Motors · 2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- TÉMOIGNAGES                           -->
+<!-- ══════════════════════════════════════ -->
+<section id="temoignages">
+  <span class="section-label">Témoignages</span>
+  <h2>Ce que disent nos <em>clients</em></h2>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="testi-text">"SnakUp a couvert notre tournoi ATP avec une réactivité et une qualité qu'on ne trouve pas ailleurs. Les highlights étaient en ligne 2h après les matchs."</div>
+      <div class="testi-author">
+        <div class="testi-av">AT</div>
+        <div><div class="testi-name">Ahmed T.</div><div class="testi-role">Directeur · ATP Challenger Monastir</div></div>
+      </div>
+    </div>
+    <div class="testi-card reveal reveal-delay-1">
+      <div class="testi-text">"La campagne GAC a dépassé tous nos KPIs. L'équipe est créative, professionnelle, et surtout elle comprend nos besoins avant même qu'on les exprime."</div>
+      <div class="testi-author">
+        <div class="testi-av" style="background:#1D9E75">GM</div>
+        <div><div class="testi-name">Ghassen M.</div><div class="testi-role">Marketing Manager · GAC Motors Tunisie</div></div>
+      </div>
+    </div>
+    <div class="testi-card reveal reveal-delay-2">
+      <div class="testi-text">"Les visuels Été ont transformé notre présence Instagram. Nos followers ont doublé en 3 semaines et les réservations ont augmenté de 40%."</div>
+      <div class="testi-author">
+        <div class="testi-av" style="background:#8B5CF6">MH</div>
+        <div><div class="testi-name">Mariem H.</div><div class="testi-role">Community Manager · Magic Hotels</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- SERVICES                              -->
+<!-- ══════════════════════════════════════ -->
+<section id="services">
+  <div class="services-intro">
+    <div>
+      <span class="section-label">Nos services</span>
+      <h2>Tout ce dont vous avez <em>besoin</em></h2>
+    </div>
+    <p class="section-intro">Six offres complémentaires, une seule équipe. De la stratégie à la publication, nous couvrons chaque étape de votre chaîne de valeur digitale.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="sc-icon" style="background:#FFF7ED">🎬</div>
+      <div class="sc-tag">Production</div>
+      <div class="sc-title">Snak Content</div>
+      <div class="sc-text">Production vidéo & photo professionnelle — tournages, montage, direction artistique pour événements et campagnes.</div>
+      <div class="sc-items">
+        <div class="sc-item">Tournages événementiels</div>
+        <div class="sc-item">Post-production complète</div>
+        <div class="sc-item">Aftermovies & highlights</div>
+        <div class="sc-item">Direction photo & vidéo</div>
+      </div>
+    </div>
+
+    <div class="service-card featured reveal reveal-delay-1">
+      <div class="sc-icon" style="background:rgba(249,115,22,.15)">✦</div>
+      <div class="sc-tag">Intelligence</div>
+      <div class="sc-title">Agent IA</div>
+      <div class="sc-text">Notre agent IA génère des contenus, analyse les performances et optimise vos campagnes en temps réel.</div>
+      <div class="sc-items">
+        <div class="sc-item">Génération de contenus</div>
+        <div class="sc-item">Analyse & insights</div>
+        <div class="sc-item">Optimisation automatique</div>
+        <div class="sc-item">Prompt library dédiée</div>
+      </div>
+    </div>
+
+    <div class="service-card reveal reveal-delay-2">
+      <div class="sc-icon" style="background:#EFF6FF">⚙️</div>
+      <div class="sc-tag">Workflow</div>
+      <div class="sc-title">Production Hub</div>
+      <div class="sc-text">Gestion de projets, coordination d'équipes et suivi de production via notre app propriétaire SnakUp.</div>
+      <div class="sc-items">
+        <div class="sc-item">Kanban & suivi temps réel</div>
+        <div class="sc-item">Validation client intégrée</div>
+        <div class="sc-item">Briefing & debriefing</div>
+        <div class="sc-item">Extranet client</div>
+      </div>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="sc-icon" style="background:#F5F3FF">📱</div>
+      <div class="sc-tag">Application</div>
+      <div class="sc-title">App SnakUp</div>
+      <div class="sc-text">Plateforme propriétaire de gestion de contenu — calendrier, livrables, messagerie et reporting en un seul endroit.</div>
+      <div class="sc-items">
+        <div class="sc-item">Dashboard client</div>
+        <div class="sc-item">Calendrier éditorial</div>
+        <div class="sc-item">Messagerie intégrée</div>
+        <div class="sc-item">Reporting automatique</div>
+      </div>
+    </div>
+
+    <div class="service-card reveal reveal-delay-1">
+      <div class="sc-icon" style="background:#ECFDF5">📣</div>
+      <div class="sc-tag">Acquisition</div>
+      <div class="sc-title">Social Ads</div>
+      <div class="sc-text">Campagnes Meta & Google gérées de A à Z — ciblage, créas, A/B tests et optimisation continue des budgets.</div>
+      <div class="sc-items">
+        <div class="sc-item">Stratégie & ciblage</div>
+        <div class="sc-item">Création des visuels ads</div>
+        <div class="sc-item">Tests & optimisation</div>
+        <div class="sc-item">Reporting ROI</div>
+      </div>
+    </div>
+
+    <div class="service-card reveal reveal-delay-2">
+      <div class="sc-icon" style="background:#FEF2F2">🎓</div>
+      <div class="sc-tag">Formation</div>
+      <div class="sc-title">Training</div>
+      <div class="sc-text">Montez en compétences avec nos formations sur-mesure — social media, contenu IA, community management et personal branding.</div>
+      <div class="sc-items">
+        <div class="sc-item">Formation équipes internes</div>
+        <div class="sc-item">Ateliers pratiques</div>
+        <div class="sc-item">Outils IA & automation</div>
+        <div class="sc-item">Certification interne</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- ECOSYSTÈME                            -->
+<!-- ══════════════════════════════════════ -->
+<section id="ecosystem-sect">
+  <div id="ecosystem">
+    <div style="margin-bottom:32px">
+      <span class="section-label" style="color:var(--ol)">Architecture technique</span>
+      <h2 style="color:white;font-size:clamp(28px,3vw,44px)">L'<em>écosystème</em> SnakUp</h2>
+    </div>
+    <div class="eco-flow">
+      <div class="eco-node"><div class="eco-node-title">Audience</div><div class="eco-node-sub">Cibles & personas</div></div>
+      <div class="eco-arrow">→</div>
+      <div class="eco-node"><div class="eco-node-title">Site Vitrine</div><div class="eco-node-sub">Landing & SEO</div></div>
+      <div class="eco-arrow">→</div>
+      <div class="eco-node"><div class="eco-node-title">Formulaires</div><div class="eco-node-sub">Lead capture</div></div>
+      <div class="eco-arrow">→</div>
+      <div class="eco-node highlight"><div class="eco-node-title">CRM Central</div><div class="eco-node-sub">GoHighLevel</div></div>
+      <div class="eco-arrow">→</div>
+      <div class="eco-node highlight"><div class="eco-node-title">Agent IA</div><div class="eco-node-sub">Production IA</div></div>
+      <div class="eco-arrow">→</div>
+      <div class="eco-node"><div class="eco-node-title">Bibliothèque</div><div class="eco-node-sub">Contenus générés</div></div>
+      <div class="eco-arrow">→</div>
+      <div class="eco-node"><div class="eco-node-title">Validation</div><div class="eco-node-sub">Humaine · Account Mgr</div></div>
+      <div class="eco-arrow">→</div>
+      <div class="eco-node"><div class="eco-node-title">Publication</div><div class="eco-node-sub">Social & Ads</div></div>
+      <div class="eco-arrow">→</div>
+      <div class="eco-node highlight"><div class="eco-node-title">Dashboard</div><div class="eco-node-sub">Looker Studio</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CONTACT                               -->
+<!-- ══════════════════════════════════════ -->
+<section id="contact">
+  <span class="section-label">Contact & Audit</span>
+  <h2>Commençons votre <em>transformation</em></h2>
+  <div class="contact-grid">
+    <!-- Left: Checklist + Mini Audit -->
+    <div class="contact-left">
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:14px">✅ Ce que vous obtenez</div>
+        <div class="checklist">
+          <div class="check-item">
+            <div class="check-icon">✓</div>
+            <div class="check-text"><strong>Audit digital gratuit</strong> — analyse de votre présence actuelle en 48h</div>
+          </div>
+          <div class="check-item">
+            <div class="check-icon">✓</div>
+            <div class="check-text"><strong>3 recommandations actionnables</strong> — concrètes, adaptées à votre secteur</div>
+          </div>
+          <div class="check-item">
+            <div class="check-icon">✓</div>
+            <div class="check-text"><strong>Devis personnalisé</strong> — sans engagement, envoyé en 24h</div>
+          </div>
+          <div class="check-item">
+            <div class="check-icon">✓</div>
+            <div class="check-text"><strong>Call stratégique de 30min</strong> — avec un Account Manager dédié</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mini-audit">
+        <div class="ma-title">Mini-audit rapide</div>
+        <div class="ma-sub">Quel est votre principal enjeu digital ? (cliquez pour sélectionner)</div>
+        <div class="ma-pills">
+          <span class="ma-pill" onclick="togglePill(this)">Manque de contenu</span>
+          <span class="ma-pill" onclick="togglePill(this)">Faible visibilité</span>
+          <span class="ma-pill" onclick="togglePill(this)">Pas de stratégie</span>
+          <span class="ma-pill" onclick="togglePill(this)">Budget mal utilisé</span>
+          <span class="ma-pill" onclick="togglePill(this)">Pas de temps</span>
+          <span class="ma-pill" onclick="togglePill(this)">ROI non mesuré</span>
+          <span class="ma-pill" onclick="togglePill(this)">Équipe non formée</span>
+          <span class="ma-pill" onclick="togglePill(this)">Concurrence forte</span>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px">
+        <div style="flex:1;background:white;border-radius:10px;padding:20px;border:1px solid var(--gray)">
+          <div style="font-size:20px;margin-bottom:6px">📞</div>
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px">Appel direct</div>
+          <div style="font-size:12px;color:var(--o);font-weight:500">+216 21 023 234</div>
+        </div>
+        <div style="flex:1;background:white;border-radius:10px;padding:20px;border:1px solid var(--gray)">
+          <div style="font-size:20px;margin-bottom:6px">✉️</div>
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px">Email</div>
+          <div style="font-size:12px;color:var(--o);font-weight:500">hello@snakup.tn</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Prise de RDV / Form -->
+    <div class="form-card reveal">
+      <div class="form-title">Réserver mon diagnostic</div>
+      <div class="form-sub">Réponse garantie sous 24h · Offre sans engagement</div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Prénom</label>
+          <input class="form-input" type="text" placeholder="Votre prénom">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nom</label>
+          <input class="form-input" type="text" placeholder="Votre nom">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email professionnel</label>
+        <input class="form-input" type="email" placeholder="vous@votreentreprise.com">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Téléphone</label>
+          <input class="form-input" type="tel" placeholder="+216 XX XXX XXX">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Secteur d'activité</label>
+          <select class="form-input form-select">
+            <option value="">Choisir…</option>
+            <option>Sport & Événementiel</option>
+            <option>Hôtellerie & Tourisme</option>
+            <option>Automobile</option>
+            <option>Import / Distribution</option>
+            <option>Banque & Finance</option>
+            <option>Retail & E-commerce</option>
+            <option>Autre</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Votre projet en quelques mots</label>
+        <textarea class="form-input" placeholder="Décrivez brièvement ce que vous cherchez à accomplir…"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Date souhaitée pour le call</label>
+        <input class="form-input" type="date">
+      </div>
+      <button class="submit-btn" onclick="handleSubmit()">Réserver mon diagnostic gratuit →</button>
+      <p style="text-align:center;font-size:11px;color:var(--text3);margin-top:12px">🔒 Vos données sont confidentielles. Aucun spam.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- FOOTER                                -->
+<!-- ══════════════════════════════════════ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#hero" class="logo">
+        <div class="logo-mark">S</div>
+        <div class="logo-wordmark">Snak<span>Up</span> Content</div>
+      </a>
+      <p>Agence de production digitale basée en Tunisie. Nous créons du contenu qui performe — de l'événementiel international aux campagnes locales.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <a href="#services" class="footer-link">Snak Content</a>
+      <a href="#services" class="footer-link">Agent IA</a>
+      <a href="#services" class="footer-link">Production Hub</a>
+      <a href="#services" class="footer-link">Social Ads</a>
+      <a href="#services" class="footer-link">Training</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Preuves</div>
+      <a href="#preuves" class="footer-link">Clients</a>
+      <a href="#chiffres" class="footer-link">Chiffres clés</a>
+      <a href="#temoignages" class="footer-link">Témoignages</a>
+      <a href="#ecosystem-sect" class="footer-link">Écosystème</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <a href="tel:+21621023234" class="footer-link">+216 21 023 234</a>
+      <a href="mailto:hello@snakup.tn" class="footer-link">hello@snakup.tn</a>
+      <a href="#contact" class="footer-link">Réserver un appel</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 SnakUp Content · Tous droits réservés · Tunisie</div>
+    <div class="footer-award">
+      <span class="award-icon">🏅</span>
+      <span class="award-text"><strong>Best Automotive Campaign 2025</strong> · GAC Motors</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Sticky header
+window.addEventListener('scroll', () => {
+  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ── Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── Mini audit pills
+function togglePill(el) {
+  el.style.background = el.style.background ? '' : 'rgba(249,115,22,.15)';
+  el.style.borderColor = el.style.borderColor === 'var(--o)' || el.style.borderColor === '' ? 'rgb(249,115,22)' : '';
+  el.style.color = el.style.color === 'rgb(249,115,22)' ? '' : 'rgb(249,115,22)';
+}
+
+// ── Form submit
+function handleSubmit() {
+  const btn = document.querySelector('.submit-btn');
+  btn.textContent = '✓ Demande envoyée ! Nous vous contactons dans 24h.';
+  btn.style.background = '#10B981';
+  btn.disabled = true;
+}
+
+// ── Smooth scroll for all anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t) t.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
